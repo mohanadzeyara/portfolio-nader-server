@@ -11,6 +11,7 @@ import postsRoutes from './routes/posts.js';
 import fieldsRoutes from './routes/fields.js';
 import profileRoutes from './routes/profile.js';
 import sectionsRoutes from './routes/sections.js';
+import contactsRoutes from './routes/contacts.js';
 import uploadRoutes from './routes/upload.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -31,9 +32,13 @@ const __dirname = path.dirname(__filename);
   app.use('/api/fields', fieldsRoutes);
   app.use('/api/profile', profileRoutes);
   app.use('/api/sections', sectionsRoutes);
+app.use('/api/contacts', contactsRoutes);
   app.use('/api/upload', uploadRoutes);
 
-  app.get('/api/health', (_req, res) => res.json({ ok: true }));
+// Health check endpoint
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok" });
+});
 
   app.listen(config.port, () => {
     console.log(`API running on http://localhost:${config.port}`);
